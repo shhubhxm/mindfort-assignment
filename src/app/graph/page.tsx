@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { ForceGraphMethods } from 'react-force-graph-2d';
 
-// Dynamic import (client-only)
+// Dynamic client-side import of ForceGraph2D
 const ForceGraph2D = dynamic(
   () => import('react-force-graph-2d').then((mod) => mod.default),
   { ssr: false }
@@ -20,9 +20,9 @@ export default function GraphPage() {
     fetch('/api/graph')
       .then((res) => res.json())
       .then((json) => {
-        // Fixed type-to-color mapping
+        // ✅ Fixed type-to-color map
         const typeColorMap: Record<string, string> = {
-          vulnerability: 'lightblue', // Use "vulnerability" instead of "finding" for clarity
+          vulnerability: 'lightblue',
           service: 'green',
           owasp: 'red',
           severity: 'orange',
@@ -31,19 +31,20 @@ export default function GraphPage() {
           package: 'cyan',
         };
 
-        // Normalize types and assign colors
+        // ✅ Normalize & remap types
         json.nodes.forEach((n: any) => {
           const rawType = (n.type || '').toString().toLowerCase();
-
-          // Optional remapping: if original data uses 'finding', treat it as 'vulnerability'
-          const normalizedType = rawType === 'finding' ? 'vulnerability' : rawType;
+          const normalizedType =
+            rawType === 'finding' ? 'vulnerability' :
+            rawType === 'svc' ? 'service' :
+            rawType;
 
           n.type = normalizedType;
           n.color = typeColorMap[normalizedType] || 'gray';
           n.__deg = 0;
         });
 
-        // Compute node degree
+        // ✅ Compute degrees
         json.edges.forEach((l: any) => {
           const source = json.nodes.find((n: any) => n.id === l.source);
           const target = json.nodes.find((n: any) => n.id === l.target);
@@ -51,21 +52,30 @@ export default function GraphPage() {
           if (target) target.__deg++;
         });
 
+        // ✅ Save graph data
         setData({ nodes: json.nodes, links: json.edges });
 
-        // Zoom to fit
+        // ✅ Auto zoom to fit
         setTimeout(() => {
-          if (fgRef.current) {
-            fgRef.current.zoomToFit(400);
-          }
+          if (fgRef.current) fgRef.current.zoomToFit(400);
         }, 300);
       });
   }, []);
 
   return (
     <div style={{ height: '100vh', background: '#111' }}>
-      {/* Legend */}
-      <div style={{ position: 'absolute', top: 20, left: 20, color: '#fff', zIndex: 10, fontSize: 14, lineHeight: '1.6' }}>
+      {/* ✅ Legend */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 20,
+          left: 20,
+          color: '#fff',
+          zIndex: 10,
+          fontSize: 14,
+          lineHeight: '1.6',
+        }}
+      >
         <div><span style={{ color: 'lightblue' }}>⬤</span> Vulnerability</div>
         <div><span style={{ color: 'green' }}>⬤</span> Service</div>
         <div><span style={{ color: 'red' }}>⬤</span> OWASP</div>
@@ -75,7 +85,7 @@ export default function GraphPage() {
         <div><span style={{ color: 'cyan' }}>⬤</span> Package</div>
       </div>
 
-      {/* Graph */}
+      {/* ✅ Graph Render */}
       <ForceGraph2D
         ref={fgRef}
         graphData={data}
