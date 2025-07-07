@@ -176,6 +176,33 @@ Then visit [localhost:3000](http://localhost:3000)
 
 ---
 
+## Sample
+
+You can test the reasoning capability of the system using the following example queries:
+
+* **"Are there any composite risks or multi-stage attacks in this system?"**
+  *Identifies lateral movement potential through shared vulnerable components.*
+
+* **"Which services share the same vulnerable component?"**
+  *Explores shared package exposure (e.g., `spring-web@5.3.20`).*
+
+* **"Could an attacker exploit a chain of vulnerabilities in this system?"**
+  *Simulates multi-stage attacks based on graph traversal logic.*
+
+* **"How can a vulnerability in order-svc impact other services?"**
+  *Demonstrates reasoning across service boundaries.*
+
+* **"What are the vulnerabilities in auth-svc and how could they be exploited?"**
+  *Performs deep reasoning on a specific node’s associated risks.*
+
+* **"As a red team analyst, describe an attack path across the system using shared libraries."**
+  *Encourages multi-agent simulation with adversarial context.*
+
+* **"As a defense agent, what mitigation steps should be taken to isolate severity-critical nodes?"**
+  *Triggers agent collaboration to suggest hardening strategies.*
+
+---
+
 ## Improvements & Next Steps
 
 * Add editable graph interface to simulate changes
