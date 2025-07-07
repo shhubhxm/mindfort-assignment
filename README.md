@@ -1,5 +1,3 @@
-Here is the complete `README.md` tailored for the **MindFort AI Technical Take-Home Assignment**, incorporating the screenshots, deployment links, and assessment requirements:
-
 ---
 
 # 🛡️ ThreatLens AI – MindFort Technical Take-Home Submission
