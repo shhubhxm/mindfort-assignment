@@ -31,7 +31,6 @@ Welcome to **ThreatLens AI**, an autonomous system designed to visualize and rea
 * Color-coded nodes by entity type
 * Interactive zoom and labels
 
-🖼️ **Screenshot:**
 ![Graph Screenshot](Images/graph.png)
 
 ---
@@ -45,8 +44,7 @@ Welcome to **ThreatLens AI**, an autonomous system designed to visualize and rea
   * Degree centrality
   * Explicit and inferred relationships
 
-🖼️ **Screenshot:**
-![Graph API Output](./graphapi.png)
+![Graph API Output](Images/graphapi.png)
 
 ---
 
@@ -62,9 +60,8 @@ Welcome to **ThreatLens AI**, an autonomous system designed to visualize and rea
   * Prompts are routed to agents (via Litellm) simulating multi-perspective reasoning
   * Responses contain explanatory insight, not just answers
 
-🖼️ **Screenshots:**
-![Chat Screenshot 1](./page1.png)
-![Chat Screenshot 2](./page2.png)
+![Chat Screenshot 1](Images/page1.png)
+![Chat Screenshot 2](Images/page2.png)
 
 ---
 
