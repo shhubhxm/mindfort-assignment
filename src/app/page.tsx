@@ -79,7 +79,7 @@ export default function Home() {
         {/* Input Area */}
         <div className="mt-4 flex items-center gap-2">
           <input
-            className="flex-grow rounded-lg border border-gray-300 px-4 py-3 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+            className="flex-grow rounded-lg border border-gray-300 px-4 py-3 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-800"
             placeholder="Ask about the vulnerabilities..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
