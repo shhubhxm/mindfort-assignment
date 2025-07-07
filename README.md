@@ -103,7 +103,7 @@ Node sizes vary by severity:
 
 ---
 
-## 📦 Project Structure
+## Project Structure
 
 ```
 mindfort-assignment/
@@ -166,8 +166,8 @@ These are securely stored in Vercel's dashboard and not hardcoded.
 ## Getting Started Locally
 
 ```bash
-git clone https://github.com/yourusername/threatlens-ai.git
-cd threatlens-ai
+git clone https://github.com/yourusername/mindfort-assignment
+cd mindfort-assignment
 npm install
 cp .env.example .env.local
 # add your Litellm credentials
@@ -193,7 +193,7 @@ Then visit [localhost:3000](http://localhost:3000)
 
 * ✅ Code hosted on GitHub
 * ✅ Deployed on Vercel: [https://threatlensai.vercel.app/](https://threatlensai.vercel.app/)
-* ✅ All routes functional: `/`, `/graph`, `/api/graph`, `/api/chat`
+* ✅ All routes functional: `/`, `/graph`, `/api/graph`
 * ✅ Screenshots and README included
 
 ---
