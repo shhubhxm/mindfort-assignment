@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { ForceGraphMethods } from 'react-force-graph-2d';
 
-// Dynamic client-side import of ForceGraph2D
+// Dynamic client-only import
 const ForceGraph2D = dynamic(
   () => import('react-force-graph-2d').then((mod) => mod.default),
   { ssr: false }
@@ -20,7 +20,7 @@ export default function GraphPage() {
     fetch('/api/graph')
       .then((res) => res.json())
       .then((json) => {
-        // ✅ Fixed type-to-color map
+        // Hardcoded colors by type
         const typeColorMap: Record<string, string> = {
           vulnerability: 'lightblue',
           service: 'green',
@@ -31,7 +31,6 @@ export default function GraphPage() {
           package: 'cyan',
         };
 
-        // ✅ Normalize & remap types
         json.nodes.forEach((n: any) => {
           const rawType = (n.type || '').toString().toLowerCase();
           const normalizedType =
@@ -41,10 +40,10 @@ export default function GraphPage() {
 
           n.type = normalizedType;
           n.color = typeColorMap[normalizedType] || 'gray';
+          n.label = n.label || n.id; // ✅ Fallback if label is missing
           n.__deg = 0;
         });
 
-        // ✅ Compute degrees
         json.edges.forEach((l: any) => {
           const source = json.nodes.find((n: any) => n.id === l.source);
           const target = json.nodes.find((n: any) => n.id === l.target);
@@ -52,10 +51,9 @@ export default function GraphPage() {
           if (target) target.__deg++;
         });
 
-        // ✅ Save graph data
         setData({ nodes: json.nodes, links: json.edges });
 
-        // ✅ Auto zoom to fit
+        // Auto zoom
         setTimeout(() => {
           if (fgRef.current) fgRef.current.zoomToFit(400);
         }, 300);
@@ -64,7 +62,7 @@ export default function GraphPage() {
 
   return (
     <div style={{ height: '100vh', background: '#111' }}>
-      {/* ✅ Legend */}
+      {/* Legend */}
       <div
         style={{
           position: 'absolute',
@@ -85,15 +83,15 @@ export default function GraphPage() {
         <div><span style={{ color: 'cyan' }}>⬤</span> Package</div>
       </div>
 
-      {/* ✅ Graph Render */}
+      {/* Graph */}
       <ForceGraph2D
         ref={fgRef}
         graphData={data}
-        nodeLabel="label"
+        nodeLabel={(node: any) => node.label || node.id} // ✅ Always show something
         nodeColor={(node: any) => node.color}
         nodeRelSize={6}
         nodeVal={(node: any) => node.__deg || 1}
-        linkLabel="label"
+        linkLabel={(link: any) => link.label || `${link.source} → ${link.target}`}
         linkDirectionalArrowLength={3.5}
         linkDirectionalArrowRelPos={1}
         linkWidth={1.5}
