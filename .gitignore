@@ -23,7 +23,7 @@
 # misc
 .DS_Store
 *.pem
-mindfort-assessment/
+mindfort-assignment/
 
 # debug
 npm-debug.log*
