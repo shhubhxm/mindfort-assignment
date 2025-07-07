@@ -32,7 +32,7 @@ Welcome to **ThreatLens AI**, an autonomous system designed to visualize and rea
 * Interactive zoom and labels
 
 🖼️ **Screenshot:**
-![Graph Screenshot](./graph.png)
+![Graph Screenshot](Images/graph.png)
 
 ---
 
@@ -108,20 +108,20 @@ Node sizes vary by severity:
 ```
 mindfort-assignment/
 ├── .next/                      # Next.js build output
-├── images/                    # Screenshots for README
+├── images/                     # Screenshots
 ├── node_modules/
-├── public/                    # Static assets
+├── public/                     # Static assets
 ├── src/
 │   ├── app/
 │   │   ├── api/
-│   │   │   ├── chat/          # API route for chat agent
-│   │   │   └── graph/         # API route for graph data
-│   │   ├── graph/             # Force-directed graph page
-│   │   └── page.tsx          # Home page with chat UI
+│   │   │   ├── chat/           # API route for chat agent
+│   │   │   └── graph/          # API route for graph data
+│   │   ├── graph/              # Force-directed graph page
+│   │   └── page.tsx            # Home page with chat UI
 │   └── lib/
-│       ├── enrichment.ts     # Data enrichment logic
-│       ├── findings.ts       # Parsed JSON data
-│       └── types.ts          # Shared types
+│       ├── enrichment.ts       # Data enrichment logic
+│       ├── findings.ts         # Parsed JSON data
+│       └── types.ts            # Shared types
 ├── .gitignore
 ├── eslint.config.mjs
 ├── next.config.mjs
@@ -129,7 +129,7 @@ mindfort-assignment/
 ├── tsconfig.json
 ├── postcss.config.js
 ├── tailwind.config.ts
-└── README.md                 # This file
+└── README.md                   # This file
 ```
 
 ---
@@ -189,7 +189,7 @@ Then visit [localhost:3000](http://localhost:3000)
 
 ---
 
-## ✉️ Submission Instructions
+## Submission Instructions
 
 * ✅ Code hosted on GitHub
 * ✅ Deployed on Vercel: [https://threatlensai.vercel.app/](https://threatlensai.vercel.app/)
