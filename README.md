@@ -7,9 +7,9 @@
 Welcome to **ThreatLens AI**, an autonomous system designed to visualize and reason over vulnerabilities using a **Vulnerability Knowledge Graph** and **Multi-Agent Chat System**. Built with Next.js, TypeScript, Litellm, and `react-force-graph-2d`, the solution offers both analytical insight and intuitive UX.
 
  **Live Deployment**:
-**Main app**: [https://threatlensai.vercel.app/](https://threatlensai.vercel.app/)
-**Knowledge graph**: [https://threatlensai.vercel.app/graph](https://threatlensai.vercel.app/graph)
-**Graph API JSON**: [https://threatlensai.vercel.app/api/graph](https://threatlensai.vercel.app/api/graph)
+* **Main app**: [https://threatlensai.vercel.app/](https://threatlensai.vercel.app/)
+* **Knowledge graph**: [https://threatlensai.vercel.app/graph](https://threatlensai.vercel.app/graph)
+* **Graph API JSON**: [https://threatlensai.vercel.app/api/graph](https://threatlensai.vercel.app/api/graph)
 
 ---
 
