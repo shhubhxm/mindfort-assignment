@@ -1,11 +1,14 @@
 'use client';
+
 import { useEffect, useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { ForceGraphMethods } from 'react-force-graph-2d';
 
-const ForceGraph2D = dynamic(() => import('react-force-graph-2d').then(mod => mod.default), {
-  ssr: false,
-}) as unknown as React.ForwardRefExoticComponent<
+// Dynamic import (client-only)
+const ForceGraph2D = dynamic(
+  () => import('react-force-graph-2d').then((mod) => mod.default),
+  { ssr: false }
+) as unknown as React.ForwardRefExoticComponent<
   React.PropsWithoutRef<any> & React.RefAttributes<ForceGraphMethods>
 >;
 
@@ -17,23 +20,30 @@ export default function GraphPage() {
     fetch('/api/graph')
       .then((res) => res.json())
       .then((json) => {
-        // Define fixed colors for each type
+        // Fixed type-to-color mapping
         const typeColorMap: Record<string, string> = {
-          finding: 'lightblue',   // Vulnerability
-          service: 'green',       // Service
-          owasp: 'red',           // OWASP
-          severity: 'orange',     // Severity
-          cwe: 'yellow',          // CWE
-          cve: 'purple',          // CVE
-          package: 'cyan',        // Package
+          vulnerability: 'lightblue', // Use "vulnerability" instead of "finding" for clarity
+          service: 'green',
+          owasp: 'red',
+          severity: 'orange',
+          cwe: 'yellow',
+          cve: 'purple',
+          package: 'cyan',
         };
 
-        // Assign color and degree
+        // Normalize types and assign colors
         json.nodes.forEach((n: any) => {
+          const rawType = (n.type || '').toString().toLowerCase();
+
+          // Optional remapping: if original data uses 'finding', treat it as 'vulnerability'
+          const normalizedType = rawType === 'finding' ? 'vulnerability' : rawType;
+
+          n.type = normalizedType;
+          n.color = typeColorMap[normalizedType] || 'gray';
           n.__deg = 0;
-          n.color = typeColorMap[n.type] || 'gray';
         });
 
+        // Compute node degree
         json.edges.forEach((l: any) => {
           const source = json.nodes.find((n: any) => n.id === l.source);
           const target = json.nodes.find((n: any) => n.id === l.target);
@@ -43,7 +53,7 @@ export default function GraphPage() {
 
         setData({ nodes: json.nodes, links: json.edges });
 
-        // Auto zoom on load
+        // Zoom to fit
         setTimeout(() => {
           if (fgRef.current) {
             fgRef.current.zoomToFit(400);
