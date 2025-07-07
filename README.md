@@ -10,15 +10,12 @@ Welcome to **ThreatLens AI**, an autonomous system designed to visualize and rea
 **Main app**: [https://threatlensai.vercel.app/](https://threatlensai.vercel.app/)
 **Knowledge graph**: [https://threatlensai.vercel.app/graph](https://threatlensai.vercel.app/graph)
 **Graph API JSON**: [https://threatlensai.vercel.app/api/graph](https://threatlensai.vercel.app/api/graph)
-**Chat API endpoint**: [https://threatlensai.vercel.app/api/chat](https://threatlensai.vercel.app/api/chat)
 
 ---
 
 ## Project Objective
 
 > Build a full-stack **Vulnerability Knowledge Graph & Multi-Agent Reasoning Chat System** that can ingest security findings, form relational insights between entities, and allow users to query risks or attack paths in natural language.
-
-This project was built according to the requirements outlined in the [MindFort AI Technical Assignment PDF](./MindFort%20AI%20Technical%20Take-Home%20Assignment.pdf).
 
 ---
 
@@ -80,7 +77,7 @@ This project was built according to the requirements outlined in the [MindFort A
 | Backend       | TypeScript API Routes                                                    |
 | LLM Routing   | [LiteLLM](https://docs.litellm.ai/docs/) – GPT-4.1, o4-mini, Grok-3-mini |
 | Deployment    | Vercel                                                                   |
-| Data Source   | Findings JSON from Google Drive (provided in assignment)                 |
+| Data Source   | Findings JSON (provided in assignment)                                   |
 
 ---
 
@@ -109,17 +106,30 @@ Node sizes vary by severity:
 ## 📦 Project Structure
 
 ```
-/src
-  /app
-    /graph         ← Knowledge graph page
-    /api
-      /graph       ← Returns nodes + edges
-      /chat        ← Multi-agent chat logic
-    /components
-      GraphCanvas  ← react-force-graph renderer
-.env.local         ← LiteLLM config
-public/
-README.md
+mindfort-assignment/
+├── .next/                      # Next.js build output
+├── images/                    # Screenshots for README
+├── node_modules/
+├── public/                    # Static assets
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   ├── chat/          # API route for chat agent
+│   │   │   └── graph/         # API route for graph data
+│   │   ├── graph/             # Force-directed graph page
+│   │   └── page.tsx          # Home page with chat UI
+│   └── lib/
+│       ├── enrichment.ts     # Data enrichment logic
+│       ├── findings.ts       # Parsed JSON data
+│       └── types.ts          # Shared types
+├── .gitignore
+├── eslint.config.mjs
+├── next.config.mjs
+├── package.json
+├── tsconfig.json
+├── postcss.config.js
+├── tailwind.config.ts
+└── README.md                 # This file
 ```
 
 ---
