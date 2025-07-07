@@ -176,7 +176,7 @@ Then visit [localhost:3000](http://localhost:3000)
 
 ---
 
-## Sample
+## Sample Query Prompts
 
 You can test the reasoning capability of the system using the following example queries:
 
